@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Loading...</title> 
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Custom styles for the patriotic theme and smooth scrolling */
+        /* IMPORTANT: Updated to 'Mr Dafoe' font for the signature effect */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Mr+Dafoe&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fcfcfc; /* Cleaner off-white */
+        }
+        /* True American Colors (Deeper, richer shades) */
+        .text-usa-red { color: #B22234; } /* Flag Red (Crimson) */
+        .bg-usa-red { background-color: #B22234; }
+        .text-usa-blue { color: #182A45; } /* Deeper Navy Navy Blue */
+        .bg-usa-blue { background-color: #182A45; }
+        .border-usa-red { border-color: #B22234; }
+        .border-usa-blue { border-color: #182A45; }
+
+        /* Enhanced Header Stripes Pattern - More prominent */
+        .header-stripes {
+            background-color: white;
+            /* Creates a slightly thicker diagonal red and white stripe pattern for boldness */
+            background-image: repeating-linear-gradient(
+                -45deg,
+                #B22234 0,
+                #B22234 12px,
+                #fcfcfc 12px,
+                #fcfcfc 24px 
+            );
+            background-size: 100% 100%;
+            box-shadow: 0 8px 10px rgba(0, 0, 0, 0.15); /* Stronger shadow */
+        }
+        
+        /* Ensure scroll behavior is smooth for internal links */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Custom class for the wide logo image */
+        .wide-logo {
+            width: 100%;
+            height: auto;
+            max-height: 25rem;
+            object-fit: contain;
+        }
+        
+        /* Reduce height on smaller screens to prevent intrusion */
+        @media (max-width: 768px) {
+            .wide-logo {
+                max-height: 12rem;
+            }
+        }
+        /* Animation for the star icon in the header */
+        @keyframes pulse-flag {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        .animate-pulse-flag {
+            animation: pulse-flag 2s infinite ease-in-out;
+        }
+
+        /* Signature Font Styling for 'Specialist' */
+        .font-signature {
+            font-family: 'Mr Dafoe', cursive; /* Applied the new font */
+            color: #B22234; /* usa-red for a strong patriotic contrast against navy blue */
+            display: inline-block;
+            font-size: 1.5em; /* Increased size slightly for Mr Dafoe */
+            line-height: 0.8;
+            font-weight: 400; 
+            transform: translateY(-8px); 
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.4); 
+        }
+        /* Responsive adjustments for the signature font on desktop */
+        @media (min-width: 640px) {
+            .font-signature {
+                font-size: 1.8em; /* Even larger on desktop */
+            }
+        }
+
+        /* --- SLIDESHOW CUSTOM STYLES --- */
+
+        .slideshow-container {
+            position: relative;
+            max-width: 1400px;
+        }
+        .mySlides {
+            display: none;
+            border-radius: 0.75rem; 
+            overflow: hidden;
+        }
+        .mySlides img {
+            height: 60vh; /* Consistent height for slides */
+            width: 100%;
+            object-fit: cover;
+        }
+        @media (max-width: 768px) {
+            .mySlides img {
+                height: 40vh;
+            }
+        }
+
+        /* Next & previous buttons */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            user-select: none;
+            background-color: rgba(24, 42, 69, 0.6); /* usa-blue with opacity */
+            border-radius: 9999px; /* Rounded buttons */
+            z-index: 10;
+        }
+        .prev {
+            left: 20px;
+        }
+        .next {
+            right: 20px;
+        }
+        .prev:hover, .next:hover {
+            background-color: rgba(24, 42, 69, 0.9);
+        }
+
+        /* Caption text */
+        .text-caption {
+            color: #f2f2f2;
+            font-size: 18px;
+            padding: 8px 12px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            font-weight: 600;
+        }
+        .numbertext {
+            color: #f2f2f2;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+
+        /* The dots/bullets/indicators */
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 4px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+            border: 2px solid #bbb;
+        }
+        
+        .active-dot {
+            background-color: #B22234; /* usa-red fill */
+            border-color: #182A45; /* usa-blue border */
+        }
+        .dot:hover {
+            background-color: #B22234; 
+            border-color: #182A45;
+        }
+
+
+        /* Fading animation */
+        .fade {
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+        @keyframes fade {
+            from {opacity: .4} 
+            to {opacity: 1}
+        }
+        /* Custom Coupon Style */
+        .coupon-border {
+            border: 4px dashed #B22234; /* Dashed red border */
+            background-image: radial-gradient(circle, #fcfcfc 10%, transparent 10%), radial-gradient(circle, #fcfcfc 10%, transparent 10%);
+            background-size: 20px 20px; /* Adjust size for the torn look */
+            background-position: top left, bottom right;
+        }
+    </style>
+</head>
+<body>
+
+    <header id="main-header" class="w-full bg-[#fcfcfc]">
+        
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 header-stripes border-b-8 border-usa-blue">
+            
+            <div class="flex justify-center items-center py-4 border-b border-gray-100 bg-white/80 backdrop-blur-sm">
+                <a href="/" class="w-full" onclick="navigateToHomeSection(event)"> 
+                    <img src="banner.png" 
+                             alt="All American Door Company Logo - Your Garage Door Specialist" 
+                             class="wide-logo object-contain mx-auto rounded-lg shadow-xl"
+                             onerror="this.onerror=null; this.src='https://placehold.co/1200x400/182A45/ffffff?text=ALL+AMERICAN+DOOR+CO.+|+FOUNDATIONAL+VALUES';">
+                </a>
+            </div>
+
+            <div class="flex items-center justify-between py-3 bg-white/90 relative">
+                
+                <div class="flex md:hidden items-center">
+                    <button id="hamburger-button" class="p-2 text-usa-blue hover:text-usa-red transition duration-150 focus:outline-none" data-i18n-aria-label="nav.toggle_menu_aria_label">
+                        <i class="fas fa-bars fa-xl"></i>
+                    </button>
+                </div>
+                <nav class="hidden md:flex mx-auto space-x-6 lg:space-x-8 text-base font-extrabold tracking-wide">
+                    <a href="/" class="nav-link text-usa-blue hover:text-usa-red transition duration-150 p-1 border-b-2 border-transparent hover:border-usa-red" onclick="navigateToHomeSection(event, 'showcase')" data-i18n="nav.link_showcase"></a>
+                    <a href="/services" class="nav-link text-usa-blue hover:text-usa-red transition duration-150 p-1 border-b-2 border-transparent hover:border-usa-red" onclick="navigateToServicesPage(event)" data-i18n="nav.link_services"></a>
+                    <a href="/gallery" class="nav-link text-usa-blue hover:text-usa-red transition duration-150 p-1 border-b-2 border-transparent hover:border-usa-red" onclick="navigateToGalleryPage(event)" data-i18n="nav.link_gallery"></a>
+                    <a href="/coupons" class="nav-link text-usa-blue hover:text-usa-red transition duration-150 p-1 border-b-2 border-transparent hover:border-usa-red" onclick="navigateToCouponsPage(event)" data-i18n="nav.link_coupons"></a>
+                    <a href="/" class="nav-link text-usa-blue hover:text-usa-red transition duration-150 p-1 border-b-2 border-transparent hover:border-usa-red" onclick="navigateToHomeSection(event, 'products')" data-i18n="nav.link_products"></a>
+                    <a href="/" class="nav-link text-usa-blue hover:text-usa-red transition duration-150 p-1 border-b-2 border-transparent hover:border-usa-red" onclick="navigateToHomeSection(event, 'reviews')" data-i18n="nav.link_reviews"></a>
+                    <a href="/" class="nav-link text-usa-blue hover:text-usa-red transition duration-150 p-1 border-b-2 border-transparent hover:border-usa-red" onclick="navigateToHomeSection(event, 'about')" data-i18n="nav.link_about"></a>
+                    <a href="/" class="nav-link px-5 py-2 bg-usa-red text-white rounded-full hover:bg-usa-blue transition duration-300 shadow-xl border-2 border-white/50" onclick="navigateToHomeSection(event, 'contact-us')">
+                        <i class="fas fa-flag mr-2 animate-pulse-flag"></i> <span data-i18n="nav.button_quote_desktop"></span>
+                    </a>
+                </nav>
+
+                <div class="md:hidden flex-grow"></div>
+
+                <a href="/" class="md:hidden px-3 py-1 bg-usa-red text-white text-sm font-bold rounded-full hover:bg-usa-blue transition duration-300 shadow-md border-2 border-white/50" onclick="navigateToHomeSection(event, 'contact-us')" data-i18n="nav.button_quote_mobile"></a>
+            </div>
+
+            <div id="mobile-menu" class="hidden md:hidden bg-gray-50 border-t border-gray-200">
+                <nav class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    <a href="/" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-200 hover:text-usa-red" onclick="navigateToHomeSection(event, 'showcase')" data-i18n="nav.link_showcase"></a>
+                    <a href="/services" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-200 hover:text-usa-red" onclick="navigateToServicesPage(event)" data-i18n="nav.link_services"></a>
+                    <a href="/gallery" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-200 hover:text-usa-red" onclick="navigateToGalleryPage(event)" data-i18n="nav.link_gallery"></a>
+                    <a href="/coupons" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-200 hover:text-usa-red" onclick="navigateToCouponsPage(event)" data-i18n="nav.link_coupons"></a>
+                    <a href="/" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-200 hover:text-usa-red" onclick="navigateToHomeSection(event, 'products')" data-i18n="nav.link_products"></a>
+                    <a href="/" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-200 hover:text-usa-red" onclick="navigateToHomeSection(event, 'reviews')" data-i18n="nav.link_reviews"></a>
+                    <a href="/" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-200 hover:text-usa-red" onclick="navigateToHomeSection(event, 'about')" data-i18n="nav.link_about"></a>
+                    <a href="/" class="mobile-nav-link block w-full text-center px-3 py-2 rounded-md text-base font-bold bg-usa-red text-white hover:bg-usa-blue mt-2" onclick="navigateToHomeSection(event, 'contact-us')" data-i18n="nav.button_quote_desktop"></a>
+                </nav>
+            </div>
+
+        </div>
+    </header>
+	
+    <div id="main-content-area">
+    </div>
+
+    <footer class="bg-usa-blue text-white py-8 border-t-4 border-usa-red">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-2 text-lg font-semibold" data-i18n="footer.copyright"></p>
+            <p class="text-sm text-gray-300 mb-2" data-i18n="footer.license"></p>
+            <p class="text-xs text-gray-400 mt-4" data-i18n="footer.tagline"></p>
+        </div>
+    </footer>
+
+
+
+    <script>
+        // --- I18N SETUP ---
+        let LANG = {}; // Variable to hold translations
+
+        // Helper function to apply translations to static elements (header, footer)
+        function initializeStaticI18n() {
+            if (!LANG || Object.keys(LANG).length === 0) return;
+
+            document.getElementById('page-title').textContent = t('meta.title');
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (key) {
+                    const ariaKey = el.getAttribute('data-i18n-aria-label');
+                    if (ariaKey) {
+                        el.setAttribute('aria-label', t(ariaKey));
+                    }
+                    el.textContent = t(key);
+                }
+            });
+        }
+
+        async function loadLanguageFile(filename) {
+            try {
+                // Use fetch to load the JSON file
+                const response = await fetch(filename);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                LANG = await response.json(); // Assign the parsed JSON to the global LANG variable
+                
+                // Define the content variables ONLY after LANG is loaded
+                initializeContentStrings(); 
+                
+                // SEO FIX: Call handleRouting to render the initial page based on the URL
+                handleRouting(); 
+                
+                // Final app initialization steps
+                initializeApp(); 
+            } catch (error) {
+                console.error("Could not load language file:", error);
+                // Fallback to a minimal structure for error handling if fetch fails
+                LANG = { 
+                    "meta": { "title": "Error Loading" }, 
+                    "nav": { 
+                        "toggle_menu_aria_label": "Toggle Menu",
+                        "link_showcase": "Showcase",
+                        "link_services": "Services",
+                        "link_gallery": "Gallery",
+                        "link_coupons": "Coupons",
+                        "link_products": "Products",
+                        "link_reviews": "Reviews",
+                        "link_about": "About",
+                        "button_quote_desktop": "Request Quote",
+                        "button_quote_mobile": "Quote"
+                    },
+                    "footer": {
+                        "copyright": "Error Loading Content. Check console for details.",
+                        "license": "",
+                        "tagline": ""
+                    }
+                };
+                initializeContentStrings(); // Init content with minimal fallback
+                handleRouting(); 
+                initializeApp(); 
+            }
+        }
+        
+        function t(key, placeholders = {}) {
+            const keys = key.split('.');
+            let value = LANG;
+            for (const k of keys) {
+                if (!value || typeof value !== 'object' || !(k in value)) {
+                    // Fallback to the key itself if not found
+                    console.warn(`Translation key not found: ${key}`);
+                    return key; 
+                }
+                value = value[k];
+            }
+            
+            let translatedString = String(value);
+
+            // Simple placeholder replacement logic (e.g., {deals} -> Deals)
+            for (const [placeholderKey, replacementValue] of Object.entries(placeholders)) {
+                translatedString = translatedString.replace(`{${placeholderKey}}`, replacementValue);
+            }
+
+            return translatedString;
+        }
+        // --- END I18N SETUP ---
+
+
+        // --- Yelp Widget Re-Initialization Logic (Extracted from the original IIFE) ---
+        // This function must be called after the homePageContent is injected into the DOM.
+        function initializeYelpWidgets() {
+            // Function n: GA tracking init
+            function n(e) { var t = document.querySelector("iframe.yelp-ga-tracker"), r = { hitType: "pageview", embedLocation: window.location.host, embedLocationPath: window.location.pathname, embedLocationQuery: window.location.search }, n = window.JSON.stringify(r); if(t && t.contentWindow) t.contentWindow.postMessage(n, e + "/ga") }
+            
+            // Function i: Message listener (handles resizing and GA events)
+            function i(e, t) {
+                try {
+                    var r = window.JSON.parse(e.data);
+                    if ("gaInit" === r.action) return void n(t);
+                    for (var i = document.querySelectorAll('iframe.yelp-review[data-review-id="' + r.reviewID + '"]'), o = document.querySelector("iframe.yelp-ga-tracker"), a = 0; a < i.length; a++) {
+                        var d = i[a];
+                        if (d.contentWindow === e.source) {
+                            if (d.style.height = r.reviewHeight + "px", "resize" === r.action) return;
+                            if (d.parentNode && d.nextSibling && d.parentNode.removeChild(d.nextSibling), o) {
+                                var c = { hitType: "event", reviewID: r.reviewID }, l = window.JSON.stringify(c);
+                                if(o.contentWindow) o.contentWindow.postMessage(l, t + "/ga");
+                            }
+                            return;
+                        }
+                    }
+                } catch(error) {
+                    console.error("Error processing Yelp widget message:", error);
+                }
+            }
+            
+            // Function o: Creates the review iframe
+            function o(e, t, r) {
+                var n = t + "/review/" + r + "?embed_location=" + window.location.host, i = document.createElement("iframe");
+                i.setAttribute("data-review-id", r);
+                i.classList.add("yelp-review");
+                i.src = n;
+                i.scrolling = "no";
+                i.style.display = "block";
+                i.style.maxWidth = "700px";
+                i.style.minWidth = "320px";
+                i.style.width = "100%";
+                i.style.height = "0";
+                i.style.border = "0";
+                if (e.parentNode) e.parentNode.insertBefore(i, e);
+            }
+            
+            // Function a: Main initialization logic
+            function a() {
+                if (document.querySelectorAll && window.postMessage && window.JSON) {
+                    var e = document.querySelectorAll("span.yelp-review[data-review-id]"), t = document.querySelector("iframe.yelp-ga-tracker");
+                    
+                    if (e.length) {
+                        if (!t) {
+                            var r = "https://" + String(e[0].getAttribute("data-hostname")) + "/embed";
+                            // Only add the message listener once
+                            if (!window._yelp_listener_added) {
+                                window.addEventListener("message", function(e) { i(e, r) }, false);
+                                window._yelp_listener_added = true;
+                            }
+                            t = document.createElement("iframe");
+                            t.classList.add("yelp-ga-tracker");
+                            t.src = r + "/ga";
+                            t.style.display = "none";
+                            if (document.body) document.body.appendChild(t);
+                        }
+                        for (var n = 0; n < e.length; n++) {
+                            var a = String(e[n].getAttribute("data-review-id")), d = String(e[n].getAttribute("data-hostname")), c = "https://" + d + "/embed";
+                            e[n].removeAttribute("data-review-id"); // The logic removes this attribute, so subsequent calls won't double-embed
+                            o(e[n], c, a);
+                        }
+                    }
+                }
+            }
+            a(); // Execute the core logic
+        }
+        // --- End Yelp Widget Logic ---
+
+
+        // --- Slideshow Logic (Moved out of DOMContentLoaded for dynamic use) ---
+        let slideIndex = 1;
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            
+            if (slides.length === 0) return; // Exit if no slides are present
+
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            
+            for (i = 0; i < dots.length; i++) {
+                dots[i].classList.remove("active-dot");
+            }
+            
+            slides[slideIndex-1].style.display = "block";
+            dots[slideIndex-1].classList.add("active-dot");
+        }
+        
+        function plusSlides(n) {
+            slideIndex += n;
+            showSlides(slideIndex);
+        }
+
+        function currentSlide(n) {
+            slideIndex = n;
+            showSlides(slideIndex);
+        }
+
+        // Auto-play interval reference
+        let slideshowInterval;
+        function startSlideshow() {
+            // Clear any existing interval to prevent overlap
+            if (slideshowInterval) clearInterval(slideshowInterval);
+            slideshowInterval = setInterval(() => {
+                plusSlides(1);
+            }, 5000);
+        }
+
+        // --- End Slideshow Logic ---
+
+
+        // --- Form Helper ---
+        function displayFormMessage(message, type) {
+            let messageElement = document.getElementById('form-message');
+            if (!messageElement) {
+                return;
+            }
+            messageElement.classList.remove('hidden');
+            // Use translation for error message
+            const messageKey = type === 'error' ? 'home.form_error_missing_fields' : 'home.form_success_message';
+            messageElement.textContent = t(messageKey);
+
+            messageElement.classList.remove('bg-green-100', 'text-green-800', 'bg-red-100', 'text-red-800');
+            if (type === 'error') {
+                messageElement.classList.add('bg-red-100', 'text-red-800');
+            } else {
+                messageElement.classList.add('bg-green-100', 'text-green-800');
+            }
+            
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                messageElement.classList.add('hidden');
+            }, 5000);
+        }
+
+        function handleFormSubmission(event) {
+            event.preventDefault();
+
+            const form = document.getElementById('service-request-form');
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const issue = document.getElementById('issue').value;
+
+            if (!name || !phone || !issue) {
+                // NOTE: Assumes t('home.form_error_missing_fields') exists in en.json
+                displayFormMessage('', 'error'); 
+                return;
+            }
+
+            const subject = encodeURIComponent(`Service Request from ${name}`);
+            const body = encodeURIComponent(`Name: ${name}\nPhone: ${phone}\n\nService Need:\n${issue}`);
+
+            // Direct mailto link (best cross-browser approach)
+            const mailtoLink = `mailto:allamericandoorcompany@gmail.com?subject=${subject}&body=${body}`;
+            window.location.href = mailtoLink;
+
+            // Now uses translated success message via displayFormMessage
+            // NOTE: Assumes t('home.form_success_message') exists in en.json
+            displayFormMessage('', 'success'); 
+            form.reset();
+        }
+        // --- End Form Helper ---
+
+
+        // Global variables that hold the content HTML strings
+        let homePageContent = '';
+        let detailedServicesContent = '';
+        let couponsContent = '';
+        let galleryContent = '';
+        
+        // Function to define the content strings, called after LANG is loaded
+        function initializeContentStrings() {
+             // --- Original Home Page Content (Saved as a string variable) --- 
+             // Text strings replaced with t() function calls
+             homePageContent = ` 
+                <main class="py-4"> 
+                    <section id="hero" class="bg-usa-blue text-white py-20 md:py-32 rounded-b-lg shadow-2xl border-b-8 border-usa-red"> 
+                        <div class="container mx-auto px-4 text-center"> 
+						
+						
+							<a href="tel:951-684-1567" class="inline-block px-12 py-5 bg-usa-red text-white font-black text-2xl rounded-lg shadow-2xl hover:bg-red-700 transform hover:scale-105 transition duration-300 border-4 border-white uppercase tracking-wider"> 
+                                 
+                            
+                            <h2 class="text-4xl sm:text-7xl font-bold mb-3 tracking-widest uppercase"> 
+                                ${t('home.hero_callnow')}
+                            </h2> 
+							<h2 class="text-3xl sm:text-5xl font-bold mb-3 tracking-widest uppercase"> 
+                                <span class="text-usa-blue">${t('home.hero_number')}</span>
+                            </h2> 
+							</a>
+							<h2 class="text-xl sm:text-2xl font-semibold mb-3 tracking-widest uppercase"> 
+                                ${t('home.hero_tagline_top').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')} 
+                            </h2> 
+                            <h1 class="text-4xl sm:text-6xl font-black mb-6 leading-tight border-b-4 border-white inline-block pb-1"> 
+                                ${t('home.hero_title', { signature_specialist: `<span class="font-signature">${t('home.hero_title_signature_part')}</span>` })} 
+                            </h1> 
+                            <p class="text-lg sm:text-2xl font-light mb-10 max-w-4xl mx-auto italic"> 
+                                ${t('home.hero_slogan')} 
+                            </p> 
+                            <a href="/" class="inline-block px-12 py-5 bg-usa-red text-white font-black text-2xl rounded-lg shadow-2xl hover:bg-red-700 transform hover:scale-105 transition duration-300 border-4 border-white uppercase tracking-wider" onclick="navigateToHomeSection(event, 'contact-us')"> 
+                                <i class="fas fa-handshake mr-3"></i> ${t('home.hero_cta')} 
+                            </a> 
+                        </div> 
+                    </section> 
+                    <section id="showcase" class="py-16 bg-gray-100 border-t-8 border-usa-red relative overflow-hidden"> 
+                        <div class="container mx-auto px-4"> 
+                            <h2 class="text-4xl font-black text-usa-blue mb-10 text-center">${t('home.showcase_title')}</h2> 
+                            <div class="slideshow-container relative mx-auto max-w-7xl shadow-2xl rounded-xl"> 
+                                <div class="mySlides fade"> 
+                                    <div class="numbertext">1 / 4</div> 
+                                    <img src="https://placehold.co/1200x600/182A45/ffffff?text=CLASSIC+AMERICAN+STEEL+DOOR" class="w-full h-auto object-cover max-h-[600px]" alt="Classic American Steel Garage Door Installation"> 
+                                    <div class="text-caption bg-usa-blue/90 text-white p-4">${t('home.showcase_slide_1_caption')}</div> 
+                                </div> 
+                                <div class="mySlides fade"> 
+                                    <div class="numbertext">2 / 4</div> 
+                                    <img src="https://placehold.co/1200x600/B22234/ffffff?text=MODERN+WOOD+OVERLAY" class="w-full h-auto object-cover max-h-[600px]" alt="Modern Wood Overlay Garage Door"> 
+                                    <div class="text-caption bg-usa-blue/90 text-white p-4">${t('home.showcase_slide_2_caption')}</div> 
+                                </div> 
+                                <div class="mySlides fade"> 
+                                    <div class="numbertext">3 / 4</div> 
+                                    <img src="https://placehold.co/1200x600/182A45/ffffff?text=EMERGENCY+REPAIR+SERVICE" class="w-full h-auto object-cover max-h-[600px]" alt="Reliable Garage Door Repair Service"> 
+                                    <div class="text-caption bg-usa-blue/90 text-white p-4">${t('home.showcase_slide_3_caption')}</div> 
+                                </div> 
+                                <div class="mySlides fade"> 
+                                    <div class="numbertext">4 / 4</div> 
+                                    <img src="https://placehold.co/1200x600/B22234/ffffff?text=CARRIAGE+HOUSE+STYLE" class="w-full h-auto object-cover max-h-[600px]" alt="Custom Carriage House Style Door"> 
+                                    <div class="text-caption bg-usa-blue/90 text-white p-4">${t('home.showcase_slide_4_caption')}</div> 
+                                </div> 
+                                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                            </div> 
+                            <div class="text-center mt-4">
+                                <span class="dot" onclick="currentSlide(1)"></span> 
+                                <span class="dot" onclick="currentSlide(2)"></span> 
+                                <span class="dot" onclick="currentSlide(3)"></span>
+                                <span class="dot" onclick="currentSlide(4)"></span> 
+                            </div>
+                            <div class="max-w-4xl mx-auto text-center mt-12">
+                                <p class="text-xl text-gray-700 mb-8 font-medium">${t('home.showcase_description').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</p>
+                                <a href="/" class="inline-block px-10 py-4 bg-usa-blue text-white font-bold text-lg rounded-lg shadow-xl hover:bg-usa-red transform hover:scale-105 transition duration-300 uppercase" onclick="navigateToHomeSection(event, 'contact-us')">
+                                    <i class="fas fa-hammer mr-3"></i> ${t('home.showcase_cta')}
+                                </a>
+                            </div>
+                        </div> 
+                    </section> 
+                    <section id="services" class="py-16 bg-white border-t-8 border-usa-blue"> 
+                        <div class="container mx-auto px-4 text-center"> 
+                            <h2 class="text-4xl font-black text-usa-red mb-10">${t('home.services_title')}</h2> 
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-8"> 
+                                <div class="bg-gray-100 p-6 rounded-xl shadow-lg border-t-8 border-usa-red transition duration-300 hover:shadow-2xl hover:bg-gray-50"> 
+                                    <i class="fas fa-wrench text-5xl text-usa-red mb-4"></i> 
+                                    <h3 class="text-2xl font-extrabold mb-3 text-usa-blue uppercase">${t('home.service_1_title')}</h3> 
+                                    <p class="text-gray-700">${t('home.service_1_description').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</p> 
+                                </div> 
+                                <div class="bg-gray-100 p-6 rounded-xl shadow-lg border-t-8 border-usa-red transition duration-300 hover:shadow-2xl hover:bg-gray-50"> 
+                                    <i class="fas fa-star text-5xl text-usa-red mb-4"></i> 
+                                    <h3 class="text-2xl font-extrabold mb-3 text-usa-blue uppercase">${t('home.service_2_title')}</h3> 
+                                    <p class="text-gray-700">${t('home.service_2_description').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</p> 
+                                </div> 
+                                <div class="bg-gray-100 p-6 rounded-xl shadow-lg border-t-8 border-usa-red transition duration-300 hover:shadow-2xl hover:bg-gray-50"> 
+                                    <i class="fas fa-handshake text-5xl text-usa-red mb-4"></i> 
+                                    <h3 class="text-2xl font-extrabold mb-3 text-usa-blue uppercase">${t('home.service_3_title')}</h3> 
+                                    <p class="text-gray-700">${t('home.service_3_description').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</p> 
+                                </div> 
+                            </div> 
+                            <a href="/services" class="inline-block mt-8 text-usa-blue hover:text-usa-red font-bold text-lg border-b-2 border-usa-blue hover:border-usa-red transition duration-300" onclick="navigateToServicesPage(event)">View Detailed Services <i class="fas fa-arrow-right ml-2"></i></a>
+                        </div> 
+                    </section> 
+                    <section id="whyus" class="bg-usa-red text-white py-16 border-t-8 border-usa-blue"> 
+                        <div class="container mx-auto px-4"> 
+                            <h2 class="text-4xl font-bold text-center mb-12 border-b-4 border-white inline-block pb-1">${t('home.whyus_title')}</h2> 
+                            <div class="max-w-4xl mx-auto"> 
+                                <ul class="space-y-6 text-xl font-medium"> 
+                                    <li class="flex items-start"> 
+                                        <i class="fas fa-crosshairs mr-4 mt-1 text-white text-2xl flex-shrink-0"></i> 
+                                        <span>${t('home.whyus_1').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</span> 
+                                    </li> 
+                                    <li class="flex items-start"> 
+                                        <i class="fas fa-people-carry-box mr-4 mt-1 text-white text-2xl flex-shrink-0"></i> 
+                                        <span>${t('home.whyus_2').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</span> 
+                                    </li> 
+                                    <li class="flex items-start"> 
+                                        <i class="fas fa-hard-hat mr-4 mt-1 text-white text-2xl flex-shrink-0"></i> 
+                                        <span>${t('home.whyus_3').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</span> 
+                                    </li> 
+                                    <li class="flex items-start"> 
+                                        <i class="fas fa-balance-scale mr-4 mt-1 text-white text-2xl flex-shrink-0"></i> 
+                                        <span>${t('home.whyus_4').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</span> 
+                                    </li> 
+                                </ul> 
+                            </div> 
+                        </div> 
+                    </section> 
+                    <section id="products" class="py-16 bg-gray-50 border-t border-b border-gray-200"> 
+                        <div class="container mx-auto px-4"> 
+                            <h2 class="text-4xl font-bold text-center mb-12 text-usa-blue">${t('home.products_title', { trust: `<span class="text-usa-red">${t('home.products_title_red')}</span>` })}</h2> 
+                            <div class="max-w-5xl mx-auto"> 
+                                <p class="text-center text-xl text-gray-700 mb-10">${t('home.products_description')}</p> 
+                                <div class="grid grid-cols-2 sm:grid-cols-5 gap-8"> 
+                                    <div class="text-center">
+                                        <img src="Liftmaster-Logo.png" alt="Liftmaster Logo" class="mx-auto mb-3 h-20 object-contain">
+                                        <p class="font-bold text-usa-blue">${t('home.vendor_1_name')}</p>
+                                        <p class="text-sm text-gray-600">${t('home.vendor_1_desc')}</p>
+                                    </div>
+                                    <div class="text-center">
+                                        <img src="Clopay-Logo.jpg" alt="Clopay Logo" class="mx-auto mb-3 h-20 object-contain">
+                                        <p class="font-bold text-usa-blue">${t('home.vendor_2_name')}</p>
+                                        <p class="text-sm text-gray-600">${t('home.vendor_2_desc')}</p>
+                                    </div>
+                                    <div class="text-center">
+                                        <img src="CHI-Logo.svg" alt="C.H.I. Logo" class="mx-auto mb-3 h-20 object-contain">
+                                        <p class="font-bold text-usa-blue">${t('home.vendor_3_name')}</p>
+                                        <p class="text-sm text-gray-600">${t('home.vendor_3_desc')}</p>
+                                    </div>
+                                    <div class="text-center">
+                                        <img src="Windsor-Logo.png" alt="Windsor Logo" class="mx-auto mb-3 h-20 object-contain">
+                                        <p class="font-bold text-usa-blue">${t('home.vendor_4_name')}</p>
+                                        <p class="text-sm text-gray-600">${t('home.vendor_4_desc')}</p>
+                                    </div>
+                                    <div class="text-center">
+                                        <img src="WD-Logo.png" alt="Wayne Dalton Logo" class="mx-auto mb-3 h-20 object-contain">
+                                        <p class="font-bold text-usa-blue">${t('home.vendor_5_name')}</p>
+                                        <p class="text-sm text-gray-600">${t('home.vendor_5_desc')}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </section> 
+                    <section id="reviews" class="py-16 bg-white border-t-8 border-usa-red"> 
+                        <div class="container mx-auto px-4 text-center"> 
+                            <h2 class="text-4xl font-bold text-center mb-10 text-usa-blue">${t('home.reviews_title')}</h2> 
+                            <a href="https://www.yelp.com/biz/all-american-door-company-riverside-2?osq=Garage+Door+Services&override_cta=Get+pricing+%26+availability" target="_blank" class="inline-block px-5 py-2 bg-usa-red text-white font-bold rounded-full mb-8 hover:bg-usa-blue transition duration-300">
+                                <i class="fab fa-yelp mr-2"></i> ${t('home.reviews_yelp_tag')} <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                            </a>
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"> 
+                                <div class="bg-white p-4 rounded-xl shadow-xl border-t-4 border-usa-red border-b-4 border-usa-blue transform hover:scale-[1.02] transition duration-300 hover:shadow-2xl hover:shadow-usa-blue/30 flex justify-center items-center min-h-[300px]"> 
+                                    <span class="yelp-review" data-review-id="IJKoBtdNWEHVsbgPoAS4cA" data-hostname="www.yelp.com"> 
+                                        <p class="text-center p-4 text-gray-500">${t('home.reviews_loading')}</p> 
+                                    </span> 
+                                </div> 
+                                <div class="bg-white p-4 rounded-xl shadow-xl border-t-4 border-usa-red border-b-4 border-usa-blue transform hover:scale-[1.02] transition duration-300 hover:shadow-2xl hover:shadow-usa-blue/30 flex justify-center items-center min-h-[300px]"> 
+                                    <span class="yelp-review" data-review-id="zIZIVdyLsVeXkx0_psThPw" data-hostname="www.yelp.com"> 
+                                        <p class="text-center p-4 text-gray-500">${t('home.reviews_loading')}</p> 
+                                    </span> 
+                                </div> 
+                                <div class="bg-white p-4 rounded-xl shadow-xl border-t-4 border-usa-red border-b-4 border-usa-blue transform hover:scale-[1.02] transition duration-300 hover:shadow-2xl hover:shadow-usa-blue/30 flex justify-center items-center min-h-[300px]"> 
+                                    <span class="yelp-review" data-review-id="VGs_B9v_7NWSkG7S4rC_8w" data-hostname="www.yelp.com"> 
+                                        <p class="text-center p-4 text-gray-500">${t('home.reviews_loading')}</p> 
+                                    </span> 
+                                </div> 
+                            </div> 
+                            <div class="mt-8">
+                                <a href="https://www.yelp.com/biz/all-american-door-company-riverside-2?osq=Garage+Door+Services&override_cta=Get+pricing+%26+availability" target="_blank" class="text-usa-blue hover:text-usa-red font-bold text-lg border-b-2 border-usa-blue hover:border-usa-red transition duration-300">
+                                    ${t('home.reviews_yelp_cta')} <i class="fas fa-arrow-right ml-2"></i>
+                                </a>
+                            </div>
+                        </div> 
+                    </section> 
+                    <section id="about" class="bg-usa-blue text-white py-16"> 
+                        <div class="container mx-auto px-4"> 
+                            <h2 class="text-4xl font-bold text-center mb-10 border-b-4 border-usa-red inline-block pb-1">${t('home.about_title')}</h2> 
+                            <div class="max-w-4xl mx-auto space-y-8"> 
+                                <p class="text-xl font-light text-center border-2 border-white p-4 rounded-xl"> 
+                                    ${t('home.about_quote').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')} 
+                                </p> 
+                                <p class="text-lg"> 
+                                    ${t('home.about_p1').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')} 
+                                </p> 
+                                <p class="text-lg"> 
+                                    ${t('home.about_p2').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')} 
+                                </p> 
+                            </div> 
+                        </div> 
+                    </section> 
+                    <section id="contact-us" class="py-16 bg-white"> 
+                        <div class="container mx-auto px-4"> 
+                            <h2 class="text-4xl font-bold text-center mb-10 text-usa-blue">${t('home.contact_title')}</h2> 
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                                <div class="bg-gray-50 p-6 rounded-xl shadow-xl border-l-8 border-usa-red">
+                                    <h3 class="text-2xl font-bold text-usa-blue mb-6">${t('home.contact_info_title')}</h3>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <h4 class="font-semibold text-lg text-usa-red mb-1">${t('home.contact_phone_h4')}</h4>
+                                            <p class="flex items-center text-xl font-bold text-usa-red"><i class="fas fa-phone-alt text-usa-red mr-3"></i> (951) 684-1567</p>
+											<p class="text-xl text-usa-blue"><i class="fas fa-phone-alt mr-2"></i> (888) 789-3667 (Toll-Free)</p>
+											<p class="text-xl text-usa-blue"><i class="fas fa-phone-alt mr-2"></i> (909) 460-0907</p>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold text-lg text-usa-red mb-1">${t('home.contact_email_h4')}</h4>
+                                            <p class="text-xl text-usa-blue"><i class="fas fa-envelope mr-2"></i> allamericandoorcompany@gmail.com</p>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold text-lg text-usa-red mb-1">${t('home.contact_hours_h4')}</h4>
+                                            <p class="text-xl text-usa-blue">${t('home.contact_hours_text').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-50 p-6 rounded-xl shadow-xl border-l-8 border-usa-blue">
+                                    <h3 class="text-2xl font-bold text-usa-red mb-6">${t('home.form_title')}</h3>
+                                    <form id="service-request-form" onsubmit="handleFormSubmission(event)" class="space-y-4">
+                                        <div>
+                                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">${t('home.form_label_name')}</label>
+                                            <input type="text" id="name" name="name" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-usa-blue focus:border-usa-blue">
+                                        </div>
+                                        <div>
+                                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">${t('home.form_label_phone')}</label>
+                                            <input type="tel" id="phone" name="phone" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-usa-blue focus:border-usa-blue">
+                                        </div>
+                                        <div>
+                                            <label for="issue" class="block text-sm font-medium text-gray-700 mb-1">${t('home.form_label_issue')}</label>
+                                            <textarea id="issue" name="issue" rows="4" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-usa-blue focus:border-usa-blue"></textarea>
+                                        </div>
+                                        <button type="submit" class="w-full py-3 px-4 bg-usa-red text-white font-black text-lg rounded-lg shadow-lg hover:bg-usa-blue focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-usa-red transition duration-300 uppercase"> 
+                                            <i class="fas fa-bullhorn mr-3"></i> ${t('home.form_submit_button')} 
+                                        </button> 
+                                        <div id="form-message" class="hidden p-3 rounded-lg font-medium text-center"></div> 
+                                    </form> 
+                                </div> 
+                            </div> 
+                        </div> 
+                    </section> 
+                    <section id="locations" class="py-16 bg-gray-50"> 
+                        <div class="container mx-auto px-4 text-center"> 
+                            <h2 class="text-4xl font-bold text-center mb-8 text-usa-blue">${t('home.locations_title')}</h2> 
+                            <p class="text-xl text-gray-700 font-semibold mb-6">${t('home.locations_description')}</p> 
+                            <div class="max-w-xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4 text-left"> 
+                                <div class="p-4 bg-white rounded-lg shadow-md border-l-4 border-usa-red"><i class="fas fa-map-marker-alt text-usa-blue mr-3"></i> ${t('home.locations_county_1')}</div> 
+                                <div class="p-4 bg-white rounded-lg shadow-md border-l-4 border-usa-red"><i class="fas fa-map-marker-alt text-usa-blue mr-3"></i> ${t('home.locations_county_2')}</div> 
+                                <div class="p-4 bg-white rounded-lg shadow-md border-l-4 border-usa-red"><i class="fas fa-map-marker-alt text-usa-blue mr-3"></i> ${t('home.locations_county_3')}</div> 
+                                <div class="p-4 bg-white rounded-lg shadow-md border-l-4 border-usa-red"><i class="fas fa-map-marker-alt text-usa-blue mr-3"></i> ${t('home.locations_county_4')}</div> 
+                            </div> 
+                        </div> 
+                    </section> 
+                </main> 
+             `;
+             
+             // --- Detailed Services Page Content (The new page) --- 
+             detailedServicesContent = ` 
+                <section id="services-hero" class="bg-usa-red text-white py-16 rounded-b-lg shadow-2xl border-b-8 border-usa-blue"> 
+                    <div class="container mx-auto px-4 text-center"> 
+                        <h1 class="text-4xl sm:text-6xl font-black mb-4 leading-tight border-b-4 border-white inline-block pb-1 uppercase tracking-tight"> 
+                            ${t('services_page.hero_title')} 
+                        </h1> 
+                        <p class="text-xl sm:text-2xl font-light mb-10 max-w-4xl mx-auto italic"> 
+                            ${t('services_page.hero_slogan')} 
+                        </p> 
+                        <a href="/" class="inline-block px-10 py-4 bg-usa-blue text-white font-black text-xl rounded-lg shadow-2xl hover:bg-gray-800 transform hover:scale-105 transition duration-300 border-4 border-white uppercase tracking-wider" onclick="navigateToHomeSection(event, 'contact-us')"> 
+                            <i class="fas fa-handshake mr-3"></i> ${t('services_page.hero_cta')} 
+                        </a> 
+                    </div> 
+                </section> 
+                <section id="services-list" class="py-16 bg-white"> 
+                    <div class="container mx-auto px-4"> 
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 max-w-7xl mx-auto"> 
+                            <div class="p-6 bg-gray-50 rounded-xl shadow-xl border-t-8 border-usa-red transition duration-300 hover:shadow-2xl hover:scale-[1.02]">
+                                <i class="fas fa-star text-5xl text-usa-blue mb-4"></i>
+                                <h2 class="text-3xl font-extrabold text-usa-blue mb-4 border-b-2 border-usa-red inline-block pb-1">${t('services_page.service_1_title')}</h2>
+                                <p class="text-gray-700 mb-6">${t('services_page.service_1_p')}</p>
+                                <ul class="list-none space-y-3 text-gray-800 text-lg text-left">
+                                    <li class="flex items-start"><i class="fas fa-check-circle text-usa-red mr-3 mt-1 flex-shrink-0"></i> <span>${t('services_page.service_1_li_1').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</span></li>
+                                    <li class="flex items-start"><i class="fas fa-check-circle text-usa-red mr-3 mt-1 flex-shrink-0"></i> <span>${t('services_page.service_1_li_2').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</span></li>
+                                    <li class="flex items-start"><i class="fas fa-check-circle text-usa-red mr-3 mt-1 flex-shrink-0"></i> <span>${t('services_page.service_1_li_3').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</span></li>
+                                </ul>
+                            </div>
+                            <div class="p-6 bg-gray-50 rounded-xl shadow-xl border-t-8 border-usa-red transition duration-300 hover:shadow-2xl hover:scale-[1.02]">
+                                <i class="fas fa-wrench text-5xl text-usa-blue mb-4"></i>
+                                <h2 class="text-3xl font-extrabold text-usa-blue mb-4 border-b-2 border-usa-red inline-block pb-1">${t('services_page.service_2_title')}</h2>
+                                <p class="text-gray-700 mb-6">${t('services_page.service_2_p')}</p>
+                                <ul class="list-none space-y-3 text-gray-800 text-lg text-left">
+                                    <li class="flex items-start"><i class="fas fa-check-circle text-usa-red mr-3 mt-1 flex-shrink-0"></i> <span>${t('services_page.service_2_li_1').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</span></li>
+                                    <li class="flex items-start"><i class="fas fa-check-circle text-usa-red mr-3 mt-1 flex-shrink-0"></i> <span>${t('services_page.service_2_li_2').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</span></li>
+                                    <li class="flex items-start"><i class="fas fa-check-circle text-usa-red mr-3 mt-1 flex-shrink-0"></i> <span>${t('services_page.service_2_li_3').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</span></li>
+                                </ul>
+                            </div>
+                            <div class="p-6 bg-gray-50 rounded-xl shadow-xl border-t-8 border-usa-red transition duration-300 hover:shadow-2xl hover:scale-[1.02]">
+                                <i class="fas fa-handshake text-5xl text-usa-blue mb-4"></i>
+                                <h2 class="text-3xl font-extrabold text-usa-blue mb-4 border-b-2 border-usa-red inline-block pb-1">${t('services_page.service_3_title')}</h2>
+                                <p class="text-gray-700 mb-6">${t('services_page.service_3_p')}</p>
+                                <ul class="list-none space-y-3 text-gray-800 text-lg text-left">
+                                    <li class="flex items-start"><i class="fas fa-check-circle text-usa-red mr-3 mt-1 flex-shrink-0"></i> <span>${t('services_page.service_3_li_1').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</span></li>
+                                    <li class="flex items-start"><i class="fas fa-check-circle text-usa-red mr-3 mt-1 flex-shrink-0"></i> <span>${t('services_page.service_3_li_2').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</span></li>
+                                    <li class="flex items-start"><i class="fas fa-check-circle text-usa-red mr-3 mt-1 flex-shrink-0"></i> <span>${t('services_page.service_3_li_3').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="cta-banner" class="bg-usa-blue text-white py-16 text-center">
+                    <div class="container mx-auto px-4">
+                        <h2 class="text-4xl font-black mb-4">${t('services_page.cta_banner_title')}</h2>
+                        <p class="text-xl font-light mb-8 max-w-3xl mx-auto">${t('services_page.cta_banner_p')}</p>
+                        <a href="/" class="inline-block px-10 py-4 bg-usa-red text-white font-black text-xl rounded-lg shadow-2xl hover:bg-gray-800 transform hover:scale-105 transition duration-300 border-4 border-white uppercase tracking-wider" onclick="navigateToHomeSection(event, 'contact-us')"> 
+                            <i class="fas fa-handshake mr-3"></i> ${t('services_page.cta_banner_button')} 
+                        </a> 
+                    </div>
+                </section>
+             `;
+             
+             // --- New Coupons Page Content --- 
+             couponsContent = ` 
+                <section id="coupons-hero" class="bg-usa-blue text-white py-16 rounded-b-lg shadow-2xl border-b-8 border-usa-red"> 
+                    <div class="container mx-auto px-4 text-center"> 
+                        <h1 class="text-4xl sm:text-6xl font-black mb-4 leading-tight border-b-4 border-white inline-block pb-1 uppercase tracking-tight"> 
+                            ${t('coupons_page.hero_title', { deals: `<span class="text-usa-red">${t('coupons_page.hero_title_red')}</span>` })} 
+                        </h1> 
+                        <p class="text-xl sm:text-2xl font-light mb-10 max-w-4xl mx-auto italic"> 
+                            ${t('coupons_page.hero_slogan')} 
+                        </p> 
+                        <a href="/coupons" class="inline-block px-10 py-4 bg-usa-red text-white font-black text-xl rounded-lg shadow-2xl hover:bg-red-700 transform hover:scale-105 transition duration-300 border-4 border-white uppercase tracking-wider" onclick="scrollToElement(event, 'coupons-list')"> 
+                            <i class="fas fa-tag mr-3"></i> ${t('coupons_page.hero_cta')} 
+                        </a> 
+                    </div> 
+                </section> 
+                <section id="coupons-list" class="py-16 bg-gray-100"> 
+                    <div class="container mx-auto px-4"> 
+                        <h2 class="text-4xl font-bold text-center mb-12 text-usa-blue">${t('coupons_page.coupons_title')}</h2> 
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"> 
+                            <div class="bg-white p-6 rounded-xl shadow-2xl coupon-border transition duration-300 hover:scale-[1.03] hover:shadow-usa-red/50"> 
+                                <div class="text-center border-b-4 border-usa-blue pb-4 mb-4"> 
+                                    <p class="text-4xl font-black text-usa-red mb-1">${t('coupons_page.coupon_1_savings')}</p> 
+                                    <p class="text-xl font-bold text-usa-blue uppercase">${t('coupons_page.coupon_1_title')}</p> 
+                                </div> 
+                                <p class="text-center text-gray-700 mb-4">${t('coupons_page.coupon_1_desc')}</p> 
+                                <div class="bg-usa-blue text-white text-center p-3 rounded-lg mb-4">
+                                    <p class="text-lg font-bold">Code: ${t('coupons_page.coupon_1_code')}</p>
+                                </div>
+                                <p class="text-xs text-gray-500 text-center italic">${t('coupons_page.coupon_1_fine_print')}</p>
+                            </div> 
+                            <div class="bg-white p-6 rounded-xl shadow-2xl coupon-border transition duration-300 hover:scale-[1.03] hover:shadow-usa-red/50"> 
+                                <div class="text-center border-b-4 border-usa-blue pb-4 mb-4"> 
+                                    <p class="text-4xl font-black text-usa-red mb-1">${t('coupons_page.coupon_2_savings')}</p> 
+                                    <p class="text-xl font-bold text-usa-blue uppercase">${t('coupons_page.coupon_2_title')}</p> 
+                                </div> 
+                                <p class="text-center text-gray-700 mb-4">${t('coupons_page.coupon_2_desc')}</p> 
+                                <div class="bg-usa-blue text-white text-center p-3 rounded-lg mb-4">
+                                    <p class="text-lg font-bold">Code: ${t('coupons_page.coupon_2_code')}</p>
+                                </div>
+                                <p class="text-xs text-gray-500 text-center italic">${t('coupons_page.coupon_2_fine_print')}</p>
+                            </div> 
+                            <div class="bg-white p-6 rounded-xl shadow-2xl coupon-border transition duration-300 hover:scale-[1.03] hover:shadow-usa-red/50"> 
+                                <div class="text-center border-b-4 border-usa-blue pb-4 mb-4"> 
+                                    <p class="text-4xl font-black text-usa-red mb-1">${t('coupons_page.coupon_3_savings')}</p> 
+                                    <p class="text-xl font-bold text-usa-blue uppercase">${t('coupons_page.coupon_3_title')}</p> 
+                                </div> 
+                                <p class="text-center text-gray-700 mb-4">${t('coupons_page.coupon_3_desc')}</p> 
+                                <div class="bg-usa-blue text-white text-center p-3 rounded-lg mb-4">
+                                    <p class="text-lg font-bold">Code: ${t('coupons_page.coupon_3_code')}</p>
+                                </div>
+                                <p class="text-xs text-gray-500 text-center italic">${t('coupons_page.coupon_3_fine_print')}</p>
+                            </div> 
+                        </div> 
+                        <div class="text-center mt-12">
+                             <a href="/" class="inline-block px-10 py-4 bg-usa-blue text-white font-black text-xl rounded-lg shadow-2xl hover:bg-gray-800 transform hover:scale-105 transition duration-300 border-4 border-white uppercase tracking-wider" onclick="navigateToHomeSection(event, 'contact-us')"> 
+                                <i class="fas fa-calendar-alt mr-3"></i> ${t('coupons_page.coupons_cta')} 
+                            </a>
+                        </div>
+                    </div> 
+                </section> 
+             `;
+             
+             // --- New Pictures Page Content --- 
+             galleryContent = ` 
+                <section id="gallery-hero" class="bg-usa-red text-white py-16 rounded-b-lg shadow-2xl border-b-8 border-usa-blue"> 
+                    <div class="container mx-auto px-4 text-center"> 
+                        <h1 class="text-4xl sm:text-6xl font-black mb-4 leading-tight border-b-4 border-white inline-block pb-1 uppercase tracking-tight"> 
+                            ${t('gallery_page.hero_title', { projects: `<span class="text-usa-blue">${t('gallery_page.hero_title_blue')}</span>` })} 
+                        </h1> 
+                        <p class="text-xl sm:text-2xl font-light mb-10 max-w-4xl mx-auto italic"> 
+                            ${t('gallery_page.hero_slogan')} 
+                        </p> 
+                        <a href="/" class="inline-block px-10 py-4 bg-usa-blue text-white font-black text-xl rounded-lg shadow-2xl hover:bg-gray-800 transform hover:scale-105 transition duration-300 border-4 border-white uppercase tracking-wider" onclick="navigateToHomeSection(event, 'contact-us')"> 
+                            <i class="fas fa-camera-retro mr-3"></i> ${t('gallery_page.hero_cta')} 
+                        </a> 
+                    </div> 
+                </section> 
+                <section id="gallery-grid" class="py-16 bg-gray-100"> 
+                    <div class="container mx-auto px-4"> 
+                        <h2 class="text-4xl font-bold text-center mb-12 text-usa-blue">${t('gallery_page.gallery_title')}</h2> 
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto"> 
+                            <div class="bg-white rounded-xl shadow-xl overflow-hidden border-4 border-usa-red transition duration-300 hover:shadow-2xl hover:scale-[1.02]"> 
+                                <img src="https://placehold.co/600x400/182A45/ffffff?text=CARRIAGE+HOUSE+INSTALL" alt="Custom Carriage House Style Garage Door Installation" class="w-full h-64 object-cover"> 
+                                <div class="p-4"> 
+                                    <h3 class="font-bold text-lg text-usa-blue">${t('gallery_page.img_1_title')}</h3> 
+                                    <p class="text-sm text-gray-600">${t('gallery_page.img_1_desc')}</p> 
+                                </div> 
+                            </div> 
+                            <div class="bg-white rounded-xl shadow-xl overflow-hidden border-4 border-usa-red transition duration-300 hover:shadow-2xl hover:scale-[1.02]"> 
+                                <img src="https://placehold.co/600x400/B22234/ffffff?text=MODERN+STEEL+UPGRADE" alt="Modern Insulated Steel Garage Door Upgrade" class="w-full h-64 object-cover"> 
+                                <div class="p-4"> 
+                                    <h3 class="font-bold text-lg text-usa-blue">${t('gallery_page.img_2_title')}</h3> 
+                                    <p class="text-sm text-gray-600">${t('gallery_page.img_2_desc')}</p> 
+                                </div> 
+                            </div> 
+                            <div class="bg-white rounded-xl shadow-xl overflow-hidden border-4 border-usa-red transition duration-300 hover:shadow-2xl hover:scale-[1.02]"> 
+                                <img src="https://placehold.co/600x400/182A45/ffffff?text=CRITICAL+REPAIR" alt="Critical Garage Door Repair Service" class="w-full h-64 object-cover"> 
+                                <div class="p-4"> 
+                                    <h3 class="font-bold text-lg text-usa-blue">${t('gallery_page.img_3_title')}</h3> 
+                                    <p class="text-sm text-gray-600">${t('gallery_page.img_3_desc')}</p> 
+                                </div> 
+                            </div> 
+                            <div class="bg-white rounded-xl shadow-xl overflow-hidden border-4 border-usa-red transition duration-300 hover:shadow-2xl hover:scale-[1.02]"> 
+                                <img src="https://placehold.co/600x400/B22234/ffffff?text=PREMIUM+WOOD+OVERLAY" alt="Premium Wood Overlay Garage Door" class="w-full h-64 object-cover"> 
+                                <div class="p-4"> 
+                                    <h3 class="font-bold text-lg text-usa-blue">${t('gallery_page.img_4_title')}</h3> 
+                                    <p class="text-sm text-gray-600">${t('gallery_page.img_4_desc')}</p> 
+                                </div> 
+                            </div> 
+                            <div class="bg-white rounded-xl shadow-xl overflow-hidden border-4 border-usa-red transition duration-300 hover:shadow-2xl hover:scale-[1.02]"> 
+                                <img src="https://placehold.co/600x400/182A45/ffffff?text=NEW+OPENER+SYSTEM" alt="New Garage Door Opener System Installation" class="w-full h-64 object-cover"> 
+                                <div class="p-4"> 
+                                    <h3 class="font-bold text-lg text-usa-blue">${t('gallery_page.img_5_title')}</h3> 
+                                    <p class="text-sm text-gray-600">${t('gallery_page.img_5_desc')}</p> 
+                                </div> 
+                            </div> 
+                            <div class="bg-white rounded-xl shadow-xl overflow-hidden border-4 border-usa-red transition duration-300 hover:shadow-2xl hover:scale-[1.02]"> 
+                                <img src="https://placehold.co/600x400/B22234/ffffff?text=PANEL+AND+WINDOW+INSERTS" alt="Garage Door Panel and Window Inserts Upgrade" class="w-full h-64 object-cover"> 
+                                <div class="p-4"> 
+                                    <h3 class="font-bold text-lg text-usa-blue">${t('gallery_page.img_6_title')}</h3> 
+                                    <p class="text-sm text-gray-600">${t('gallery_page.img_6_desc')}</p> 
+                                </div> 
+                            </div> 
+                        </div> 
+                        <div class="text-center mt-12">
+                             <a href="/" class="inline-block px-10 py-4 bg-usa-blue text-white font-black text-xl rounded-lg shadow-2xl hover:bg-gray-800 transform hover:scale-105 transition duration-300 border-4 border-white uppercase tracking-wider" onclick="navigateToHomeSection(event, 'contact-us')"> 
+                                <i class="fas fa-comments mr-3"></i> ${t('gallery_page.gallery_cta')} 
+                            </a> 
+                        </div>
+                    </div> 
+                </section> 
+             `;
+        }
+        
+        // --- Navigation Functions (Updated for History API) ---
+
+        // Helper function to handle the actual content injection and animation
+        function renderContent(contentHtml, pageName, scrollTargetId = null) {
+            const container = document.getElementById('main-content-area');
+            if (!container) return;
+
+            // 1. Fade out current content
+            container.style.opacity = 0;
+
+            // Wait for fade out animation
+            setTimeout(() => {
+                // 2. Insert new content
+                container.innerHTML = contentHtml;
+                
+                // 3. Page-specific post-render fixups
+                if (pageName === 'home') {
+                    // 1. Re-initialize Yelp widgets
+                    initializeYelpWidgets(); 
+
+                    // 2. Re-initialize Slideshow
+                    const slides = document.getElementsByClassName("mySlides");
+                    if (slides.length > 0) {
+                        slideIndex = 1; // Reset slide
+                        showSlides(slideIndex);
+                        startSlideshow(); // Start auto-play
+                    } else {
+                        // Stop slideshow if not present
+                        if (slideshowInterval) clearInterval(slideshowInterval);
+                    }
+                } else {
+                    // Stop slideshow on other pages
+                    if (slideshowInterval) clearInterval(slideshowInterval);
+                }
+                
+                // Re-attach form handler if contact section is present
+                const form = document.getElementById('service-request-form');
+                if (form) {
+                    form.onsubmit = handleFormSubmission;
+                }
+
+                // Scroll to target element after content swap
+                if (scrollTargetId) {
+                    scrollToElement(null, scrollTargetId); // Use local helper
+                } else {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+
+                // 4. Fade in new content
+                container.style.opacity = 1;
+
+            }, 300); // Wait for fade out animation
+        }
+        
+        // SEO FIX 1: Core Navigation function using History API
+        function navigateTo(event, path, contentHtml, pageName, scrollTargetId = null) {
+            if (event) event.preventDefault();
+            
+            // Push the new state to the browser history
+            history.pushState({ page: pageName, scrollId: scrollTargetId }, '', path);
+            
+            // Render the content
+            renderContent(contentHtml, pageName, scrollTargetId);
+        }
+        
+        // Updated individual navigation functions
+        function navigateToHomeSection(event, scrollTargetId = null) {
+            // Note: Home page paths are just the root /, but we pass the section ID for scrolling.
+            navigateTo(event, '/', homePageContent, 'home', scrollTargetId);
+        }
+
+        function navigateToServicesPage(event) {
+            navigateTo(event, '/services', detailedServicesContent, 'services', null);
+        }
+        
+        function navigateToCouponsPage(event) {
+            navigateTo(event, '/coupons', couponsContent, 'coupons', null);
+        }
+
+        function navigateToGalleryPage(event) {
+            navigateTo(event, '/gallery', galleryContent, 'gallery', null);
+        }
+        
+        function scrollToElement(event, id) {
+             if (event) event.preventDefault();
+             const element = document.getElementById(id);
+             if (element) {
+                 element.scrollIntoView({ behavior: 'smooth' });
+             }
+        }
+        
+        // SEO FIX 2: Function to parse the URL path and load the correct page
+        function handleRouting() {
+            // Get the current URL path
+            const path = window.location.pathname;
+            const scrollTargetId = window.location.hash ? window.location.hash.substring(1) : null;
+            
+            // Route logic
+            switch (path) {
+                case '/services':
+                    renderContent(detailedServicesContent, 'services', null);
+                    break;
+                case '/gallery':
+                    renderContent(galleryContent, 'gallery', null);
+                    break;
+                case '/coupons':
+                    renderContent(couponsContent, 'coupons', null);
+                    break;
+                case '/':
+                default:
+                    renderContent(homePageContent, 'home', scrollTargetId);
+                    // Ensure the root path is correct in the browser bar if we hit default
+                    if (path !== '/') {
+                        history.replaceState({ page: 'home', scrollId: scrollTargetId }, '', '/');
+                    }
+                    break;
+            }
+            
+            // Update the static text (title, header, footer) with new translation
+            initializeStaticI18n(); 
+        }
+        
+        // --- Master Initialization Function ---
+        function initializeApp() {
+            const hamburgerButton = document.getElementById('hamburger-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            // SEO FIX 2: Add popstate listener for back/forward buttons
+            window.addEventListener('popstate', handleRouting);
+
+            // 1. Hamburger Menu Toggle Functionality
+            if (hamburgerButton) {
+                hamburgerButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            
+            // Add click listeners to close menu (needed for mobile links)
+            const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // Set initial fade transition
+            const container = document.getElementById('main-content-area');
+            if (container) {
+                container.style.transition = 'opacity 0.3s ease-in-out';
+            }
+        }
+        
+        // --- Final DOMContentLoaded Listener (Starts the whole process) ---
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load the language file first. 
+            // Once loaded, it calls initializeContentStrings() and handleRouting()
+            loadLanguageFile('en.json'); 
+        });
+    </script>
+	
+
+</body>
+</html>
